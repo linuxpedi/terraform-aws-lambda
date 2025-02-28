@@ -6,7 +6,7 @@ Bu depo, AWS Lambda fonksiyonlarını kolayca oluşturmak ve yönetmek için bir
 
 ### Özellikler
 - **Kolay Dağıtım**: AWS Lambda fonksiyonlarının oluşturulmasını ve yönetilmesini basitleştirir.
-- **Yapılandırılabilir**: Modülü özel ihtiyaçlarınıza özelleştirin.
+- **Yapılandırılabilir**: Modülü özel ihtiyaçlarınıza göre özelleştirin.
 - **Yeniden Kullanılabilir Bileşenler**: İş akışınızı hızlandırmak için önceden oluşturulmuş bileşenleri kullanın.
 
 ### Kullanım
@@ -26,11 +26,14 @@ Bu depo, AWS Lambda fonksiyonlarını kolayca oluşturmak ve yönetmek için bir
     Modül adı ve diğer spesifik alanları gerektiği gibi güncelleyin:
     ```hcl
     module "hello_world" {
-      source        = "./modules/lambda"
-      function_name = "hello_world"
-      handler       = "lambda_function.lambda_handler"
-      runtime       = "python3.9"
-      ...
+      source                = "./modules/lambda"
+      function_name         = "hello_world"
+      handler               = "lambda_function.lambda_handler"
+      runtime               = "python3.9"
+      source_dir            = "${path.module}/lambda_functions/hello_world"
+      environment_variables = {
+        foo = "bar"
+      }
     }
     ```
 5. **Yapılandırmayı uygulayın**:
@@ -71,11 +74,14 @@ This repository provides a Terraform module to easily create and manage AWS Lamb
     Update the module name and other specific fields as needed:
     ```hcl
     module "hello_world" {
-      source        = "./modules/lambda"
-      function_name = "hello_world"
-      handler       = "lambda_function.lambda_handler"
-      runtime       = "python3.9"
-      ...
+      source                = "./modules/lambda"
+      function_name         = "hello_world"
+      handler               = "lambda_function.lambda_handler"
+      runtime               = "python3.9"
+      source_dir            = "${path.module}/lambda_functions/hello_world"
+      environment_variables = {
+        foo = "bar"
+      }
     }
     ```
 5. **Apply the configuration**:
@@ -91,5 +97,6 @@ This repository provides a Terraform module to easily create and manage AWS Lamb
 This project is licensed under the MIT License.
 
 ---
+````
 
 
