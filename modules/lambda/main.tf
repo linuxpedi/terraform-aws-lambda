@@ -16,3 +16,11 @@ resource "aws_lambda_function" "this" {
     variables = var.environment_variables
   }
 }
+
+resource "null_resource" "cleanup" {
+  provisioner "local-exec" {
+    command = "rm -f ${path.root}/lambda_function_payload.zip"
+  }
+
+  depends_on = [aws_lambda_function.this]
+}
